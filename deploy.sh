@@ -106,7 +106,9 @@ fi
 # 3. Build Docpad site
 echo Building docpad site
 cd "$DEPLOYMENT_SOURCE"
-rm out
+if [[ ! -e "$DEPLOYMENT_SOURCE\out" ]]; then
+  rm "$DEPLOYMENT_SOURCE\out"
+fi
 eval $NPM_CMD "./node_modules/docpad/bin/docpad generate --env static"
 exitWithMessageOnError "docpad build failed"
 
